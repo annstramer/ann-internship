@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
 import Skeleton from "../UI/Skeleton";
 
 const carouselOptions = {
@@ -49,7 +47,7 @@ const HotCollections = () => {
             signal: abortController.signal,
           }
         );
-        //setHotCols(data);
+        setHotCols(data);
       } catch (e) {
         if(axios.isCancel(e)) {
           console.log('Request canceled: ', e.message);
@@ -85,7 +83,7 @@ const HotCollections = () => {
             ? new Array(4).fill(0).map((_, index) => (
                 <div className="nft_coll" key={index}>
                   <div className="nft_wrap">
-                    <Skeleton width = "100%" height = "170px" borderRadius = "0"></Skeleton>
+                    <Skeleton width = "100%" height = "100%" borderRadius = "0"></Skeleton>
                   </div>
                   <div className="nft_coll_pp">
                     <Skeleton width = "50px" height = "50px" borderRadius = "50%"></Skeleton>
