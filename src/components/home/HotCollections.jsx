@@ -58,7 +58,7 @@ const HotCollections = () => {
         setHotCols([]);
       } finally {
         console.log("finally.")
-        setTimeout(() => setHotColsLoading(false), 2000);
+        setTimeout(() => setHotColsLoading(false), 6000);
       }
     };
 
