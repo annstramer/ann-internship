@@ -13206,10 +13206,23 @@ a.read_more i {
 .nft_wrap {
   position: relative;
   width: 100%;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 10px 10px 0 0;
   -moz-border-radius: 10px 10px 0 0;
   -webkit-border-radius: 10px 10px 0 0;
+}
+
+.nft_wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nft-wrap .skeleton-box {
+  width: 100%;
+  height: 100%;
 }
 
 .nft_coll:hover img {
