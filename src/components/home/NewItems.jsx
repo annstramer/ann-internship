@@ -30,6 +30,7 @@ const NewItems = () => {
     slidesToShow: initialSlides,
     initialSlide: 0,
     swipeToSlide: true,
+    lazyLoad: 'ondemand',
     arrows: true,
     prevArrow: <PrevArrow cClass="owl-prev" />,
     nextArrow: <NextArrow cClass="owl-next" />,
