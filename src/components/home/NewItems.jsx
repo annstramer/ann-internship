@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import Skeleton from "../UI/Skeleton";
-import CountDown from "../UI/CountDown";
-import PrevArrow from "../UI/PrevArrow";
-import NextArrow from "../UI/NextArrow";
+import { CountDown, PrevArrow, NextArrow, Skeleton } from "../UI";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
