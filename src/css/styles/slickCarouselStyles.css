@@ -1,0 +1,16 @@
+.slick-slider {
+  width: 100%;
+}
+
+.slick-list {
+  margin: 0 -10px; /* 10px negative margin on each side */
+}
+
+.slick-slide {
+  padding: 0 5px; /* 10px padding on each side for content */
+}
+
+.nft__item {
+  height: auto;
+  max-height: 440px;
+}
