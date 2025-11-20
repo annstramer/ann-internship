@@ -1,40 +1,40 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import OwlCarousel from "react-owl-carousel";
-import Skeleton from "../UI/Skeleton";
-
-const carouselOptions = {
-  margin: 10,
-  loop: true,
-  responsiveClass: true,
-  autoplay: false,
-  nav: true,
-  dots: false,
-  smartSpeed: 500,
-  responsive: {
-    0: {
-      items: 1,
-    },
-    575: {
-      items: 2,
-    },
-    768: {
-      items: 3,
-    },
-    992: {
-      items: 3,
-    },
-    1200: {
-      items: 4,
-    },
-  },
-};
+import Slider from "react-slick";
+import { PrevArrow, NextArrow, Skeleton } from "../UI";
 
 const HotCollections = () => {
   const [hotCols, setHotCols] = useState([]);
   const [hotColsLoading, setHotColsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [initialSlides, setInitialSlides] = useState(4);
+    
+  const handlePageSize = () => {
+    const width = window.innerWidth;
+    if (width > 992) {
+        setInitialSlides(4);
+    } else if (width > 768) {
+        setInitialSlides(3);
+    } else if (width > 480) {
+        setInitialSlides(2);
+    } else {
+        setInitialSlides(1);
+    }
+  };
+    
+  const slickCarouselOptions = {
+    dots: false,
+    infinite: true,
+    speed: 400,
+    slidesToShow: initialSlides,
+    initialSlide: 0,
+    swipeToSlide: true,
+    lazyLoad: 'ondemand',
+    arrows: true,
+    prevArrow: <PrevArrow cClass="owl-prev" />,
+    nextArrow: <NextArrow cClass="owl-next" />,
+  }
   
   useEffect(() => {
     const abortController = new AbortController();
@@ -57,14 +57,16 @@ const HotCollections = () => {
         }
         setHotCols([]);
       } finally {
-        console.log("finally.")
         setTimeout(() => setHotColsLoading(false), 6000);
       }
     };
 
     getHotCollections();
+    handlePageSize();
+    window.addEventListener("resize", handlePageSize);
     return() => {
       abortController.abort();
+      window.removeEventListener("resize", handlePageSize);
     };
   }, []);
 
@@ -78,7 +80,7 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <OwlCarousel className="owl-theme" {...carouselOptions} key={hotColsLoading}>
+          <Slider className="owl-theme" {...slickCarouselOptions} key={hotColsLoading}>
             {(hotCols.length === 0)
             ? new Array(4).fill(0).map((_, index) => (
                 <div className="nft_coll" key={index}>
@@ -127,7 +129,7 @@ const HotCollections = () => {
                   </div>
               ))
             }
-          </OwlCarousel>
+          </Slider>
         </div>
       </div>
     </section>
