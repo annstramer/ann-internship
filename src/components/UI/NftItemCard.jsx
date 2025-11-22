@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { CountDown } from "../UI";
 
-const NftItemCard = ({card}, isLoading) => {
-  console.log("why all cards rendered twice?")
+const NftItemCard = ({card}) => {
   return (
     <div className="nft__item">
       <div className="author_list_pp">
@@ -16,7 +15,7 @@ const NftItemCard = ({card}, isLoading) => {
           <i className="fa fa-check"></i>
         </Link>
       </div>
-      {card.expiryDate ? <CountDown expires={card.expiryDate} key={isLoading}/> : null }
+      {card.expiryDate ? <CountDown expires={card.expiryDate} /> : null }
       <div className="nft__item_wrap">
         <div className="nft__item_extra">
           <div className="nft__item_buttons">

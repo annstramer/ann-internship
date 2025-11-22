@@ -10,6 +10,7 @@ const ExploreItems = () => {
   const [isLoadMoreDisabled, setIsLoadMoreDisabled] = useState(false);
   const [filterItems, setFilterItems] = useState('');
   const showItems = exploreItems.slice(0,visibleItemCount);
+  const incrementCardsBy = 4;
 
   const handleChangeFilter = (event) => {
     setFilterItems(event.target.value);
@@ -82,13 +83,13 @@ const ExploreItems = () => {
             className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
             style={{ display: "block", backgroundSize: "cover" }}
           >
-            <NftItemCard card={item} isLoading={exploreItemsLoading}/>
+            <NftItemCard card={item}/>
           </div>
           ))
         }
       <div className="col-md-12 text-center">
         <button id="loadmore" className="btn-main lead" 
-          onClick={() => handleIncrementByValue(4)}
+          onClick={() => handleIncrementByValue(incrementCardsBy)}
           disabled={isLoadMoreDisabled}>
           Load more
         </button>
