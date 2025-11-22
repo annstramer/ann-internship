@@ -5,11 +5,16 @@ import { CountDown, Skeleton } from "../UI";
 
 const ExploreItems = () => {
   const [exploreItems, setExploreItems] = useState([]);
-  const [showItems, setShowItems] = useState([]);
   const [exploreItemsLoading, setExploreItemsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [visibleItemCount, setVisibleItemCount] = useState(8);
   const [isLoadMoreDisabled, setIsLoadMoreDisabled] = useState(false);
+  const [filterItems, setFilterItems] = useState('');
+  const showItems = exploreItems.slice(0,visibleItemCount);
+
+  const handleChangeFilter = (event) => {
+    setFilterItems(event.target.value);
+  }
   
   const handleIncrementByValue = (value) => {
     if (visibleItemCount < 16) {
@@ -20,22 +25,17 @@ const ExploreItems = () => {
   };
 
   useEffect(() => {
-      setShowItems(exploreItems.slice(0,visibleItemCount));
-  }, [visibleItemCount]);
-
-  useEffect(() => {
     const abortController = new AbortController();
 
     const getExploreItems = async () => {
       try {
         setExploreItemsLoading(true);
         const { data } = await axios.get(
-          `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore`, {
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filterItems}`, {
             signal: abortController.signal,
           }
         );
         setExploreItems(data);
-        setShowItems(data.slice(0,visibleItemCount));
       } catch (e) {
         if(axios.isCancel(e)) {
           console.log('Request canceled: ', e.message);
@@ -44,22 +44,22 @@ const ExploreItems = () => {
           setError(e);
         }
         setExploreItems([]);
-        setShowItems([]);
       } finally {
         setTimeout(() => setExploreItemsLoading(false), 2000);
       }
     };
     
+    setVisibleItemCount(8);
     getExploreItems();
     return() => {
       abortController.abort();
     };
-  }, []);
+  }, [filterItems]);
   
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="">
+        <select id="filter-items" value={filterItems} onChange={handleChangeFilter}>
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
