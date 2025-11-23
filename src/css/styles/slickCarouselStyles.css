@@ -14,3 +14,7 @@
   height: auto;
   max-height: 440px;
 }
+
+.nft__item img {
+  max-height: 295px;
+}

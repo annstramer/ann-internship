@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 
-
 const CountDown = ({ expires }) => {
 
-  
   const requestRef = useRef();
   const [startTime, setStartTime] = useState(Date.now());
   const [hasExpired, setHasExpired] = useState(false);
