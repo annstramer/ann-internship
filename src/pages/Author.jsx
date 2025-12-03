@@ -116,7 +116,7 @@ const Author = () => {
                                 <NftItemSkeleton key={index} />
                               </div>
                             ))
-                            : <AuthorItems nftItems={authorNFTItems.nftCollection} authorImage={authorNFTItems.authorImage}/>
+                            : <AuthorItems nftItems={authorNFTItems.nftCollection} authorImage={authorNFTItems.authorImage} authorId={authorId}/>
                           }
                       </div>
                     </div>
