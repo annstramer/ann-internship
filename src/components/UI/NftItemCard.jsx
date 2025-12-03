@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { CountDown } from "../UI";
 
-const NftItemCard = ({ card, authorImage }) => {
+const NftItemCard = ({ card, authorImage, authorId }) => {
   
   return (
     <div className="nft__item">
       <div className="author_list_pp">
         <Link
-          to={`/author/${card.authorId}`}
+          to={card.authorId ? `/author/${card.authorId}` : `/author/${authorId}`}
           data-bs-toggle="tooltip"
           data-bs-placement="top"
         >
