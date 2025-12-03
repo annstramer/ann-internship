@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { CountDown } from "../UI";
 
-const NftItemCard = ({card}) => {
+const NftItemCard = ({ card, authorImage }) => {
+  
   return (
     <div className="nft__item">
       <div className="author_list_pp">
@@ -11,7 +12,7 @@ const NftItemCard = ({card}) => {
           data-bs-toggle="tooltip"
           data-bs-placement="top"
         >
-          <img className="lazy" src={card.authorImage} alt="" />
+          {card.authorImage ? <img className="lazy" src={card.authorImage} alt="" /> : <img className="lazy" src={authorImage} alt="" />}
           <i className="fa fa-check"></i>
         </Link>
       </div>

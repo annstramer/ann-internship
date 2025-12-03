@@ -46,7 +46,7 @@ const HotCollections = () => {
           `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`, {
             signal: abortController.signal,
           }
-        );
+        )
         setHotCols(data);
       } catch (e) {
         if(axios.isCancel(e)) {
