@@ -57,7 +57,7 @@ const HotCollections = () => {
         }
         setHotCols([]);
       } finally {
-        setTimeout(() => setHotColsLoading(false), 6000);
+        setTimeout(() => setHotColsLoading(false), 2000);
       }
     };
 
@@ -99,7 +99,7 @@ const HotCollections = () => {
                 </div>
               ))
             : hotCols.map(
-              ({ id, title, authorImage, nftImage, nftId, code }) => (
+              ({ id, title, authorId, authorImage, nftImage, nftId, code }) => (
                   <div className="nft_coll" key={id}>
                     <div className="nft_wrap">
                       <Link to={`/item-details/${nftId}`}>
@@ -111,7 +111,7 @@ const HotCollections = () => {
                       </Link>
                     </div>
                     <div className="nft_coll_pp">
-                      <Link to="/author">
+                      <Link to={`/author/${authorId}`}>
                         <img
                           className="lazy pp-coll"
                           src={authorImage}
