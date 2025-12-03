@@ -4,3 +4,4 @@ export { default as PrevArrow } from './PrevArrow';
 export { default as Skeleton } from './Skeleton';
 export { default as NftItemCard } from './NftItemCard';
 export { default as NftItemSkeleton } from './NftItemSkeleton';
+export { default as AuthorSkeleton } from './AuthorSkeleton';
