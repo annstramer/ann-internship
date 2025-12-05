@@ -37,16 +37,15 @@ const HotCollections = () => {
   }
   
   useEffect(() => {
-    const abortController = new AbortController();
+    const source = axios.CancelToken.source();
 
     const getHotCollections = async () => {
       try {
         setHotColsLoading(true);
         const { data } = await axios.get(
-          `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`, {
-            signal: abortController.signal,
-          }
-        )
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`,
+          { cancelToken: source.token }
+        );
         setHotCols(data);
       } catch (e) {
         if(axios.isCancel(e)) {
@@ -65,7 +64,7 @@ const HotCollections = () => {
     handlePageSize();
     window.addEventListener("resize", handlePageSize);
     return() => {
-      abortController.abort();
+      source.cancel("Component unmounted");
       window.removeEventListener("resize", handlePageSize);
     };
   }, []);
