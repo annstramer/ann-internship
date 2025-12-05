@@ -100,7 +100,7 @@ const HotCollections = () => {
               ))
             : hotCols.map(
               ({ id, title, authorId, authorImage, nftImage, nftId, code }) => (
-                  <div className="nft_coll" key={id}>
+                  <div className="nft_coll" key={id} >
                     <div className="nft_wrap">
                       <Link to={`/item-details/${nftId}`}>
                         <img

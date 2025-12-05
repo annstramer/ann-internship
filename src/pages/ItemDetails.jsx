@@ -53,7 +53,10 @@ const ItemDetails = () => {
               {(nftDetailsLoading)
                ? <NftDetailsSkeleton />
                : <>
-                  <div className="col-md-6 text-center" key={nftDetails.id}>
+                  <div className="col-md-6 text-center" key={nftDetails.id} 
+                    data-aos="fade-in" 
+                    data-aos-duration="500" 
+                    data-aos-delay="200">
                     <img
                       src={nftDetails.nftImage}
                       className="img-fluid img-rounded mb-sm-30 nft-image"
@@ -62,9 +65,15 @@ const ItemDetails = () => {
                   </div>
                   <div className="col-md-6">
                     <div className="item_info">
-                      <h2>{nftDetails.title} #{nftDetails.tag}</h2>
-
-                      <div className="item_info_counts">
+                      <h2
+                        data-aos="short-fade-left" 
+                        data-aos-duration="500" 
+                        data-aos-delay="800">
+                      {nftDetails.title} #{nftDetails.tag}</h2>
+                      <div className="item_info_counts"
+                        data-aos="fade-in" 
+                        data-aos-duration="500" 
+                        data-aos-delay="500">
                         <div className="item_info_views">
                           <i className="fa fa-eye"></i>
                           {nftDetails.views}
@@ -74,10 +83,16 @@ const ItemDetails = () => {
                           {nftDetails.likes}
                         </div>
                       </div>
-                      <p>
+                      <p
+                        data-aos="fade-in" 
+                        data-aos-duration="500" 
+                        data-aos-delay="500">
                         {nftDetails.description}
                       </p>
-                      <div className="d-flex flex-row">
+                      <div className="d-flex flex-row"
+                        data-aos="fade-in" 
+                        data-aos-duration="400" 
+                        data-aos-delay="200">
                         <div className="mr40">
                           <h6>Owner</h6>
                           <div className="item_author">
@@ -92,10 +107,11 @@ const ItemDetails = () => {
                             </div>
                           </div>
                         </div>
-                        <div></div>
                       </div>
                       <div className="de_tab tab_simple">
-                        <div className="de_tab_content">
+                        <div className="de_tab_content"
+                          data-aos="fade-in" 
+                          data-aos-duration="400">
                           <h6>Creator</h6>
                           <div className="item_author">
                             <div className="author_list_pp">
@@ -110,10 +126,14 @@ const ItemDetails = () => {
                           </div>
                         </div>
                         <div className="spacer-40"></div>
+                        <div
+                          data-aos="fade-in" 
+                          data-aos-duration="400">
                         <h6>Price</h6>
                         <div className="nft-item-price">
                           <img src={EthImage} alt="" />
                           <span>{nftDetails.price}</span>
+                        </div>
                         </div>
                       </div>
                     </div>

@@ -75,7 +75,10 @@ const Author = () => {
                   ? <AuthorSkeleton />
                   : <div className="d_profile de-flex">
                       <div className="de-flex-col">
-                        <div className="profile_avatar">
+                        <div className="profile_avatar"
+                          data-aos="fade-in" 
+                          data-aos-duration="500" 
+                          data-aos-delay="800">
                           <img src={authorNFTItems.authorImage} alt="" />
                           <i className="fa fa-check"></i>
                           <div className="profile_name">
