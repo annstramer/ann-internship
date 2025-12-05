@@ -6,3 +6,4 @@ export { default as NftItemCard } from './NftItemCard';
 export { default as NftItemSkeleton } from './NftItemSkeleton';
 export { default as AuthorSkeleton } from './AuthorSkeleton';
 export { default as NftDetailsSkeleton } from './NftDetailsSkeleton';
+export { default as CategoryCard } from './CategoryCard';

@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { CategoryCard } from "../UI";
 
 const BrowseByCategory = () => {
+  
   return (
     <section id="section-category" className="no-top">
       <div className="container">
@@ -12,42 +13,12 @@ const BrowseByCategory = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="col-md-2 col-sm-4 col-6 mb-sm-30">
-            <Link to="/explore" className="icon-box style-2 rounded">
-              <i className="fa fa-image"></i>
-              <span>Art</span>
-            </Link>
-          </div>
-          <div className="col-md-2 col-sm-4 col-6 mb-sm-30">
-            <Link to="/explore" className="icon-box style-2 rounded">
-              <i className="fa fa-music"></i>
-              <span>Music</span>
-            </Link>
-          </div>
-          <div className="col-md-2 col-sm-4 col-6 mb-sm-30">
-            <Link to="/explore" className="icon-box style-2 rounded">
-              <i className="fa fa-search"></i>
-              <span>Domain Names</span>
-            </Link>
-          </div>
-          <div className="col-md-2 col-sm-4 col-6 mb-sm-30">
-            <Link to="/explore" className="icon-box style-2 rounded">
-              <i className="fa fa-globe"></i>
-              <span>Virtual Worlds</span>
-            </Link>
-          </div>
-          <div className="col-md-2 col-sm-4 col-6 mb-sm-30">
-            <Link to="/explore" className="icon-box style-2 rounded">
-              <i className="fa fa-vcard"></i>
-              <span>Trading Cards</span>
-            </Link>
-          </div>
-          <div className="col-md-2 col-sm-4 col-6 mb-sm-30">
-            <Link to="/explore" className="icon-box style-2 rounded">
-              <i className="fa fa-th"></i>
-              <span>Collectibles</span>
-            </Link>
-          </div>
+          <CategoryCard faIcon="fa-image" animDelay="200"/>
+          <CategoryCard faIcon="fa-music" animDelay="350"/>
+          <CategoryCard faIcon="fa-search" animDelay="500"/>
+          <CategoryCard faIcon="fa-globe" animDelay="650"/>
+          <CategoryCard faIcon="fa-address-card" animDelay="800"/>
+          <CategoryCard faIcon="fa-th" animDelay="950"/>
         </div>
       </div>
     </section>

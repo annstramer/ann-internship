@@ -1,0 +1,21 @@
+[data-aos="short-fade-left"] {
+  opacity: 0;
+  transform: translate(5px, 0);
+  transition-property: transform, opacity;
+}
+
+[data-aos="short-fade-left"].aos-animate {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+[data-aos="short-fade-up"] {
+  opacity: 0;
+  transform: translate(0, 10px);
+  transition-property: transform, opacity;
+}
+
+[data-aos="short-fade-up"].aos-animate {
+  opacity: 1;
+  transform: translate(0, 0);
+}
