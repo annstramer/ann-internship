@@ -37,6 +37,8 @@ const NewItems = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
+    let isMounted = true;
+    let timeoutId = null;
 
     const getNewItems = async () => {
       try {
@@ -46,17 +48,27 @@ const NewItems = () => {
             signal: abortController.signal,
           }
         );
-        setNewItems(data);
+        if (isMounted) {
+          setNewItems(data);
+        }
       } catch (e) {
         if(axios.isCancel(e)) {
           console.log('Request canceled: ', e.message);
         } else {
           console.error("Error fetching New Items data: ", e);
-          setError(e);
+          if (isMounted) {
+            setError(e);
+          }
         }
-        setNewItems([]);
+        if (isMounted) {
+          setNewItems([]);
+        }
       } finally {
-        setTimeout(() => setNewItemsLoading(false), 2000);
+        timeoutId = setTimeout(() => {
+          if (isMounted) {
+            setNewItemsLoading(false)
+          }
+        }, 2000);
       }
     };
     
@@ -64,8 +76,12 @@ const NewItems = () => {
     handlePageSize();
     window.addEventListener("resize", handlePageSize);
     return() => {
+      isMounted = false;
       abortController.abort();
       window.removeEventListener("resize", handlePageSize);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     };
   }, []);
 

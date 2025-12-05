@@ -37,26 +37,39 @@ const HotCollections = () => {
   }
   
   useEffect(() => {
-    const source = axios.CancelToken.source();
+    const abortController = new AbortController();
+    let isMounted = true;
+    let timeoutId = null;
 
     const getHotCollections = async () => {
       try {
         setHotColsLoading(true);
         const { data } = await axios.get(
-          `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`,
-          { cancelToken: source.token }
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`, {
+            signal: abortController.signal,
+          }
         );
-        setHotCols(data);
+        if (isMounted) {
+          setHotCols(data);
+        }
       } catch (e) {
         if(axios.isCancel(e)) {
           console.log('Request canceled: ', e.message);
         } else {
           console.error("Error fetching HotCollections data: ", e);
-          setError(e);
+          if (isMounted) {
+            setError(e);
+          }
         }
-        setHotCols([]);
+        if (isMounted) {
+          setHotCols([]);
+        }
       } finally {
-        setTimeout(() => setHotColsLoading(false), 2000);
+        timeoutId = setTimeout(() => {
+          if (isMounted) {
+            setHotColsLoading(false)
+          }
+        }, 2000);
       }
     };
 
@@ -64,8 +77,12 @@ const HotCollections = () => {
     handlePageSize();
     window.addEventListener("resize", handlePageSize);
     return() => {
-      source.cancel("Component unmounted");
+      isMounted = false;
+      abortController.abort();
       window.removeEventListener("resize", handlePageSize);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     };
   }, []);
 

@@ -10,35 +10,51 @@ const TopSellers = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  const abortController = new AbortController();
+    const abortController = new AbortController();
+    let isMounted = true;
+    let timeoutId = null;
 
-  const getTopSellers = async () => {
-    try {
-      setTopSellersLoading(true);
-      const { data } = await axios.get(
-        `https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers`, {
-          signal: abortController.signal,
+    const getTopSellers = async () => {
+      try {
+        setTopSellersLoading(true);
+        const { data } = await axios.get(
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers`, {
+            signal: abortController.signal,
+          }
+        );
+        if (isMounted) {
+          setTopSellers(data);
         }
-      );
-      setTopSellers(data);
-    } catch (e) {
-      if(axios.isCancel(e)) {
-        console.log('Request canceled: ', e.message);
-      } else {
-        console.error("Error fetching Top Sellers data: ", e);
-        setError(e);
+      } catch (e) {
+        if(axios.isCancel(e)) {
+          console.log('Request canceled: ', e.message);
+        } else {
+          console.error("Error fetching Top Sellers data: ", e);
+          if (isMounted) {
+            setError(e);
+          }
+        }
+        if (isMounted) {
+          setTopSellers([]);
+        }
+      } finally {
+        timeoutId = setTimeout(() => {
+          if (isMounted) {
+            setTopSellersLoading(false)
+          }
+        }, 2000);
       }
-      setTopSellers([]);
-    } finally {
-      setTimeout(() => setTopSellersLoading(false), 2000);
-    }
-  };
+    };
 
-  getTopSellers();
-  return() => {
-    abortController.abort();
-  };
-}, []);
+    getTopSellers();
+    return() => {
+      isMounted = false;
+      abortController.abort();
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
 
   return (
     <section id="section-popular" className="pb-5">
